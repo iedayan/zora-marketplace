@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { DigitalWearable, MarketplaceFilters, WearableCategory, SupportedPlatform } from '../types/marketplace';
 import WearableCard from './WearableCard';
 import FilterSidebar from './FilterSidebar';
-import { metaMaskHooks } from '../providers/Web3Provider';
+import { useWeb3 } from '../providers/Web3Provider';
 
 interface MarketplaceProps {
   className?: string;
@@ -14,7 +14,7 @@ export default function Marketplace({ className = '' }: MarketplaceProps) {
   const [filters, setFilters] = useState<MarketplaceFilters>({});
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const account = metaMaskHooks.useAccount();
+  const { account } = useWeb3(); // Updated to use the new hook
 
   // Mock data - Replace with actual API calls
   useEffect(() => {
